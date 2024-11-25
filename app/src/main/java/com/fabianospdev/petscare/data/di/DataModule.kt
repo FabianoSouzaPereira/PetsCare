@@ -16,6 +16,9 @@ import com.fabianospdev.petscare.domain.repositories.LoginLocalRepository
 import com.fabianospdev.petscare.domain.repositories.ProfileLocalRepository
 import com.fabianospdev.petscare.domain.repositories.SettingsLocalRepository
 import com.fabianospdev.petscare.domain.repositories.UserLocalRepository
+import com.fabianospdev.petscare.domain.repositories.UserRemoteRepository
+import com.fabianospdev.petscare.domain.usecases.user.UserRemoteUsecase
+import com.fabianospdev.petscare.domain.usecases.user.UserRemoteUsecaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +30,11 @@ import retrofit2.Retrofit
 object DataModule {
 
     /**  DATASOURCES  **/
+
+    @Provides
+    fun provideUserRemoteUseCase(userRemoteRepository: UserRemoteRepository): UserRemoteUsecase {
+        return UserRemoteUsecaseImpl(userRemoteRepository)
+    }
 
     @Provides
     fun provideLoginDatasource(retrofit: Retrofit): LoginDatasource {
